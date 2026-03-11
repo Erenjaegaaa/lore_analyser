@@ -48,7 +48,9 @@ def load_chunks(path: str) -> list[dict]:
         log.error("chunks.json not found at %s", path)
         sys.exit(1)
     with p.open("r", encoding="utf-8") as f:
-        chunks = json.load(f)
+        data = json.load(f)
+    # chunks.json wraps the list under a "chunks" key
+    chunks = data["chunks"] if isinstance(data, dict) else data
     log.info("Loaded %d chunks from %s", len(chunks), path)
     return chunks
 
