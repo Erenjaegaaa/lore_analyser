@@ -31,7 +31,7 @@ class Neo4jConfig:
 @dataclass
 class LLMConfig:
     gemini_api_key: str = field(default_factory=lambda: os.getenv("GEMINI_API_KEY", ""))
-    extraction_model: str = "gemini-1.5-flash"
+    extraction_model: str = "gemini-2.5-flash"
     answer_model: str = "gemini-1.5-flash"
     max_output_tokens: int = 2048
     temperature: float = 0.2
