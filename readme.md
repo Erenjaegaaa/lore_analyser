@@ -308,12 +308,6 @@ python -m evaluation.metrics
 
 Built with Next.js, designed with a dark fantasy aesthetic. Features:
 
-- **Cinematic hero** — Video hero section with scroll-driven crossfade into the chat interface
-- **Dark parchment theme** — gold accents, Cinzel and Cormorant Garamond fonts
-- **Chat interface** — message history, animated loading states, source citation tags
-- **Sidebar** — example questions, about section, debug info toggle
-- **Debug mode** — shows graph sentences used, vector chunks retrieved, and latency per query
-
 ---
 
 ## 🧠 Design Decisions
