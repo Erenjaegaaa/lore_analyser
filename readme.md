@@ -351,7 +351,7 @@ Classifiers add latency and failure modes. Both retrieval paths are cheap enough
 
 ## 👤 Author
 
-**Sahi** · Computer Science Student  
+**Saahil** · maker/cse student  
 GitHub: [@Erenjaegaaa](https://github.com/Erenjaegaaa)
 
 ---
