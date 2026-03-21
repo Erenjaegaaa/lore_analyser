@@ -293,14 +293,14 @@ python -m evaluation.metrics
 
 ---
 
-## 🌐 Deployment
+### 🌐 Deployment
 
-| Component | Platform | URL |
-|---|---|---|
-| Frontend | Vercel | [lorekeeper-ochre.vercel.app](https://lorekeeper-ochre.vercel.app) |
-| Backend | Railway | https://web-production-4955d.up.railway.app |
-| Graph DB | Neo4j AuraDB Free | Cloud hosted |
-| Vector DB | ChromaDB | Bundled with backend |
+| Component | Platform |
+|---|---|
+| Frontend | Vercel |
+| Backend | Railway |
+| Graph DB | Neo4j AuraDB Free |
+| Vector DB | ChromaDB (bundled with backend) |
 
 ---
 
