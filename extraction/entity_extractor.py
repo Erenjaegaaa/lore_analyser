@@ -41,12 +41,24 @@ def _parse_json(raw: str) -> dict:
     Returns the parsed dict, or raises ValueError on failure.
     """
     text = raw.strip()
+
+    # Strip <think>...</think> blocks produced by reasoning models like Qwen3.
+    # The model still does full reasoning internally — stripping only removes
+    # the chain-of-thought wrapper so the JSON parser sees clean output.
+    # Safe for all other models: the condition is False if no <think> block.
+    if "<think>" in text:
+        end = text.find("</think>")
+        if end != -1:
+            text = text[end + len("</think>"):].strip()
+
+    # Remove ```json ... ``` or ``` ... ``` fences if the model added them
     if text.startswith("```"):
         lines = text.splitlines()
         inner = lines[1:] if lines[-1].strip() == "```" else lines[1:]
         if inner and inner[-1].strip() == "```":
             inner = inner[:-1]
         text = "\n".join(inner).strip()
+
     return json.loads(text)
 
 

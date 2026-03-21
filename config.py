@@ -32,7 +32,7 @@ class Neo4jConfig:
 class LLMConfig:
     gemini_api_key: str = field(default_factory=lambda: os.getenv("GEMINI_API_KEY", ""))
     groq_api_key: str = field(default_factory=lambda: os.getenv("GROQ_API_KEY", ""))
-    extraction_model: str = "mixtral-8x7b-32768"
+    extraction_model: str = "qwen/qwen3-32b"
     answer_model: str = "gemini-2.5-flash"
     max_output_tokens: int = 8192
     temperature: float = 0.2
