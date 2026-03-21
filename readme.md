@@ -96,7 +96,7 @@ Tested on 10 typed questions covering factual, relationship, event, location, ar
 
 | Property | Value |
 |---|---|
-| Source | English Wikipedia (71 pages) |
+| Source | English Wikipedia (76 pages) |
 | Coverage | LotR, The Hobbit, The Silmarillion, Unfinished Tales |
 | Chunks | 1,115 overlapping text passages (500 tokens, 100 overlap) |
 | Vectors | 1,115 embeddings (all-MiniLM-L6-v2, 384 dims) |
