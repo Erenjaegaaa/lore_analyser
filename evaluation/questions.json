@@ -1,0 +1,72 @@
+[
+  {
+    "id": "q01",
+    "type": "factual",
+    "question": "Who forged the One Ring?",
+    "expected_entities": ["One Ring", "Sauron"],
+    "notes": "Simple factual — should be answered by both graph (FORGED_BY) and vector"
+  },
+  {
+    "id": "q02",
+    "type": "relationship",
+    "question": "What is the relationship between Aragorn and Isildur?",
+    "expected_entities": ["Aragorn", "Isildur"],
+    "notes": "Relationship question — graph HEIR_OF edge should be retrieved"
+  },
+  {
+    "id": "q03",
+    "type": "character",
+    "question": "Who is Gandalf?",
+    "expected_entities": ["Gandalf"],
+    "notes": "Character overview — tests vector retrieval depth"
+  },
+  {
+    "id": "q04",
+    "type": "event",
+    "question": "What happened at the Battle of Helm's Deep?",
+    "expected_entities": ["Battle of Helm's Deep", "Helm's Deep"],
+    "notes": "Event question — tests vector retrieval for battle descriptions"
+  },
+  {
+    "id": "q05",
+    "type": "location",
+    "question": "What is Mordor?",
+    "expected_entities": ["Mordor", "Sauron"],
+    "notes": "Location question — graph RULES_OVER and LOCATED_IN edges expected"
+  },
+  {
+    "id": "q06",
+    "type": "artifact",
+    "question": "What are the Silmarils and why are they important?",
+    "expected_entities": ["Silmarils", "Feanor"],
+    "notes": "Artifact question — tests Silmarillion coverage"
+  },
+  {
+    "id": "q07",
+    "type": "relationship",
+    "question": "How are Frodo and Bilbo related?",
+    "expected_entities": ["Frodo Baggins", "Bilbo Baggins"],
+    "notes": "Multi-hop relationship — tests graph path traversal"
+  },
+  {
+    "id": "q08",
+    "type": "factual",
+    "question": "Who is the dark lord of Mordor?",
+    "expected_entities": ["Sauron", "Mordor"],
+    "notes": "Lowercase input — tests candidate extraction fix"
+  },
+  {
+    "id": "q09",
+    "type": "event",
+    "question": "What is the War of the Ring?",
+    "expected_entities": ["War of the Ring"],
+    "notes": "Broad event question — tests multi-chunk synthesis"
+  },
+  {
+    "id": "q10",
+    "type": "thematic",
+    "question": "What is the significance of the Shire to hobbits?",
+    "expected_entities": ["Shire"],
+    "notes": "Thematic question — tests vector retrieval for cultural context"
+  }
+]

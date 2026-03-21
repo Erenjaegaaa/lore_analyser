@@ -27,6 +27,20 @@ from utils.logger import get_logger
 
 log = get_logger(__name__)
 
+# ── Stopwords for candidate extraction ───────────────────────────────────────
+# Common question words and English function words that should never be treated
+# as entity candidates, even if they are capitalized or title-cased.
+
+_STOPWORDS = {
+    "Who", "What", "Where", "When", "Why", "How", "Which", "Is", "Are",
+    "Was", "Were", "Did", "Do", "Does", "The", "A", "An", "In", "Of",
+    "And", "Or", "But", "To", "From", "By", "For", "With", "At", "On",
+    "That", "This", "Their", "There", "They", "Have", "Been", "Will",
+    "About", "Tell", "Deal", "Role", "Like", "What", "Does", "Know",
+    "More", "Also", "Very", "Just", "Some", "Into", "Than", "Then",
+    "Really", "Actually", "Basically", "Generally", "Specifically",
+}
+
 # ── Neo4j name index (lazy, cached per process) ───────────────────────────────
 # We load all node names once and reuse across calls to avoid repeated DB hits.
 
@@ -63,14 +77,20 @@ def extract_candidates(question: str) -> list[str]:
     """
     Extract candidate entity names from a natural language question.
 
-    Uses a lightweight heuristic — capitalized word sequences — rather than
-    a full NER model. Fast, no API calls, good enough for Tolkien proper nouns
-    which are almost always capitalized.
+    Uses two strategies:
+      1. Capitalized word sequences — high precision for properly typed names
+         e.g. "Helm's Deep", "One Ring", "Gil-galad"
+      2. All words > 3 chars title-cased — catches lowercase entity names
+         e.g. "gandalf" → "Gandalf", "mordor" → "Mordor"
+
+    Both strategies filter against _STOPWORDS to remove common English words.
+    No LLM call needed — fast and cheap.
 
     Examples:
-        "Who is Aragorn's father?"      → ["Aragorn"]
-        "Where was the One Ring forged?" → ["One Ring"]
-        "What happened at Helm's Deep?" → ["Helm's Deep"]
+        "Who is Aragorn's father?"           → ["Aragorn"]
+        "what is the deal with gandalf"      → ["Gandalf"]
+        "Where was the One Ring forged?"     → ["One Ring"]
+        "tell me about mordor"               → ["Mordor"]
 
     Args:
         question: The user's raw question string.
@@ -81,21 +101,26 @@ def extract_candidates(question: str) -> list[str]:
     if not question:
         return []
 
-    # Match sequences of capitalized words (including apostrophes and hyphens)
-    # e.g. "Helm's Deep", "Gil-galad", "One Ring"
+    candidates = []
+    seen: set[str] = set()
+
+    # Strategy 1 — capitalized word sequences (high precision)
+    # Matches sequences like "Helm's Deep", "Gil-galad", "One Ring"
     pattern = r"\b([A-Z][a-zA-Z'\-]+(?:\s+[A-Z][a-zA-Z'\-]+)*)\b"
-    matches = re.findall(pattern, question)
+    for m in re.findall(pattern, question):
+        if m not in _STOPWORDS and len(m) > 1 and m not in seen:
+            candidates.append(m)
+            seen.add(m)
 
-    # Filter out common question words that happen to be capitalized
-    stopwords = {
-        "Who", "What", "Where", "When", "Why", "How", "Which", "Is", "Are",
-        "Was", "Were", "Did", "Do", "Does", "The", "A", "An", "In", "Of",
-        "And", "Or", "But", "To", "From", "By", "For", "With", "At", "On",
-    }
-    candidates = [m for m in matches if m not in stopwords and len(m) > 1]
+    # Strategy 2 — all words > 3 chars, title-cased for matching
+    # This catches lowercase entity names like "gandalf", "mordor", "frodo"
+    # Title-casing aligns with how names are stored in Neo4j
+    for word in re.findall(r"\b[a-zA-Z'\-]{4,}\b", question):
+        titled = word.strip("'").title()
+        if titled not in _STOPWORDS and titled not in seen:
+            candidates.append(titled)
+            seen.add(titled)
 
-    # Also add the full question stripped of question words as a fallback
-    # candidate — catches cases where the entity isn't capitalized
     log.debug("extract_candidates(%r) → %r", question[:80], candidates)
     return candidates
 
