@@ -41,7 +41,7 @@ User Question
       │
       ▼
 ┌─────────────────────────────────────────────┐
-│              Query Pipeline                  │
+│              Query Pipeline                 │
 │                                             │
 │  ┌───────────────┐    ┌──────────────────┐  │
 │  │ Graph         │    │ Vector           │  │
@@ -54,14 +54,14 @@ User Question
 │  │   traversal   │    │                  │  │
 │  │ → triples     │    │                  │  │
 │  └───────────────┘    └──────────────────┘  │
-│          │                    │              │
-│          └──────────┬─────────┘              │
-│                     ▼                        │
-│            Context Assembler                 │
-│       GRAPH FACTS + TEXT CONTEXT             │
-│                     │                        │
-│                     ▼                        │
-│          Gemini Answer Generation            │
+│          │                    │             │
+│          └──────────┬─────────┘             │
+│                     ▼                       │
+│            Context Assembler                │
+│       GRAPH FACTS + TEXT CONTEXT            | 
+│                     │                       │
+│                     ▼                       │
+│          Gemini Answer Generation           │
 └─────────────────────────────────────────────┘
       │
       ▼
