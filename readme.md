@@ -1,27 +1,20 @@
-#
-``
-######## ##     ## ########    ##        #######  ########  ######## 
-   ##    ##     ## ##          ##       ##     ## ##     ## ##       
-   ##    ##     ## ##          ##       ##     ## ##     ## ##       
-   ##    ######### ######      ##       ##     ## ########  ######   
-   ##    ##     ## ##          ##       ##     ## ##   ##   ##       
-   ##    ##     ## ##          ##       ##     ## ##    ##  ##       
-   ##    ##     ## ########    ########  #######  ##     ## ######## 
+<div align="center">
 
-##    ## ######## ######## ########  ######## ########  
-##   ##  ##       ##       ##     ## ##       ##     ## 
-##  ##   ##       ##       ##     ## ##       ##     ## 
-#####    ######   ######   ########  ######   ########  
-##  ##   ##       ##       ##        ##       ##   ##   
-##   ##  ##       ##       ##        ##       ##    ##  
-##    ## ######## ######## ##        ######## ##     ## 
+```
+ _     ___  ____  _____   _  _______ _____ ____  _____ ____  
+| |   / _ \|  _ \| ____| | |/ / ____| ____|  _ \| ____|  _ \ 
+| |  | | | | |_) |  _|   | ' /|  _| |  _| | |_) |  _| | |_) |
+| |__| |_| |  _ <| |___  | . \| |___| |___|  __/| |___|  _ < 
+|_____\___/|_| \_\_____| |_|\_\_____|_____|_|   |_____|_| \_\
 ```
 
-> *Ask anything of the archives of Middle-earth.*
-
-A **Hybrid GraphRAG** question-answering system built over Tolkien's Middle-earth lore. Combines a **Neo4j knowledge graph** with **ChromaDB vector search** for retrieval, then uses **Gemini** to generate grounded, cited answers in natural language.
+*Ask anything of the archives of Middle-earth.*
 
 **🌐 Live Demo → [lorekeeper-ochre.vercel.app](https://lorekeeper-ochre.vercel.app)**
+
+</div>
+
+A **Hybrid GraphRAG** question-answering system built over Tolkien's Middle-earth lore. Combines a **Neo4j knowledge graph** with **ChromaDB vector search** for retrieval, then uses **Gemini** to generate grounded, cited answers in natural language.
 
 ---
 
@@ -95,7 +88,7 @@ Tested on 10 typed questions covering factual, relationship, event, location, ar
 | **Graph hit rate** | 100% |
 | **Vector hit rate** | 100% |
 | **Both paths used** | 100% |
-| **Average latency** | ~7 seconds |
+| **Average latency** | ~9 seconds |
 
 ---
 
@@ -315,7 +308,7 @@ python -m evaluation.metrics
 
 Built with Next.js, designed with a dark fantasy aesthetic. Features:
 
-- **Cinematic hero** — AI-generated video of a wizard reading scrolls, with scroll-driven crossfade into the chat interface
+- **Cinematic hero** — Video hero section with scroll-driven crossfade into the chat interface
 - **Dark parchment theme** — gold accents, Cinzel and Cormorant Garamond fonts
 - **Chat interface** — message history, animated loading states, source citation tags
 - **Sidebar** — example questions, about section, debug info toggle
@@ -346,7 +339,7 @@ Classifiers add latency and failure modes. Both retrieval paths are cheap enough
 
 - **Graph coverage** — 651/1,115 chunks extracted into the graph (58%). Remaining chunks are accessible via vector search only.
 - **Graph noise** — LLM extraction introduces ~10–15% incorrect relations. The vector path and Gemini's grounding instruction compensate in most cases.
-- **Latency** — ~7–16 seconds per query due to Gemini API + cloud Neo4j round trips.
+- **Latency** — ~9–16 seconds per query due to Gemini API + cloud Neo4j round trips.
 - **Real-world noise** — Wikipedia's adaptation/reception sections introduce non-lore entities (directors, actors, scholars) into the graph.
 
 ---
@@ -364,7 +357,7 @@ Classifiers add latency and failure modes. Both retrieval paths are cheap enough
 
 ## 👤 Author
 
-**Sahi** · Computer Science Student
+**Sahi** · Computer Science Student  
 GitHub: [@Erenjaegaaa](https://github.com/Erenjaegaaa)
 
 ---
