@@ -20,7 +20,7 @@ A **Hybrid GraphRAG** question-answering system built over Tolkien's Middle-eart
 
 ## ✨ What it does
 
-Ask any question about Tolkien's legendarium in plain English:
+Ask any question about Tolkien's legendarium in plain English like:
 
 ```
 "Who forged the One Ring?"
